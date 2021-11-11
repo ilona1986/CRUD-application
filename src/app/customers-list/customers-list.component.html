@@ -1,0 +1,67 @@
+<h2 class="py-3">Список покупателей</h2>
+
+<table class="table  table-striped">
+  <ng-container *ngTemplateOutlet="tableHeadBlock"></ng-container>
+
+  <tbody>
+  <tr *ngFor="let customer of  httpService.customers; let i = index">
+    <th class="align-middle" scope="row">{{i + 1}}</th>
+
+    <ng-container
+      *ngTemplateOutlet="isEditPos === i ? thenBlock : elseBlock; context: {$implicit: customer}"></ng-container>
+    <ng-container *ngTemplateOutlet="customerControlsBlock; context: {customer: customer, index: i}"></ng-container>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #tableHeadBlock>
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Имя</th>
+    <th scope="col">Email</th>
+    <th scope="col">Телефон</th>
+    <th scope="col">Город</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+</ng-template>
+
+<ng-template #thenBlock let-customer>
+  <td class="align-middle">
+    <input class="form-control form-control-sm" type="text" value="{{customer.name}}">
+  </td>
+  <td class="align-middle">
+    <input class="form-control form-control-sm" type="email" value="{{customer.email}}">
+  </td>
+  <td class="align-middle">
+    <input class="form-control form-control-sm" type="tel" value="{{customer.mobile}}">
+  </td>
+  <td class="align-middle">
+    <input class="form-control form-control-sm" type="text" value="{{customer.location}}">
+  </td>
+</ng-template>
+
+<ng-template #elseBlock let-customer>
+  <td class="align-middle">{{customer.name}}</td>
+  <td class="align-middle">{{customer.email}}</td>
+  <td class="align-middle">{{customer.mobile}}</td>
+  <td class="align-middle">{{customer.location}}</td>
+</ng-template>
+
+<ng-template #customerControlsBlock let-customer="customer" let-i="index">
+  <td class="align-middle controls">
+    <button (click)="editCustomer(i)" class="btn btn-outline-info ms-2 btn-sm" type="button">
+      <i class="fas fa-edit"></i>
+    </button>
+    <button (click)="cancelEdit()" class="btn btn-outline-info ms-2 btn-sm" type="button">
+      <i class="fas fa-undo"></i>
+    </button>
+    <button (click)="saveCustomer(customer, i)" class="btn btn-outline-info ms-2 btn-sm" type="button">
+      <i class="fas fa-save"></i>
+    </button>
+    <button (click)="deleteCustomer(customer)" class="btn btn-outline-info ms-2 btn-sm" type="button">
+      <i class="fas fa-trash"></i>
+    </button>
+  </td>
+</ng-template>
