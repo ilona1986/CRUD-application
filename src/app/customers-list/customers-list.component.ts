@@ -40,7 +40,7 @@ export class CustomersListComponent implements OnInit {
   }
 
   deleteCustomer(customer: Customer): void {
-
+    this.httpService.deleteData(customer)
   }
 
   setValue(key: string, value: string, original: string): void {

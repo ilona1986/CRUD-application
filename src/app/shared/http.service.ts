@@ -38,7 +38,10 @@ export class HttpService {
     )
   }
 
-  deleteData(): void {
-
+  deleteData(customer: Customer): void {
+    this.httpClient.delete<void>(`${url}/${customer.key}.json`, httpOptions).subscribe(
+      () => this.customers.splice(this.customers.indexOf(customer), 1),
+      error => console.error(error)
+    )
   }
 }
