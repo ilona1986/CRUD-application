@@ -30,8 +30,12 @@ export class HttpService {
     )
   }
 
-  updateData(): void {
-
+  updateData(customer: Customer, i: number): void {
+    const {key, ...data} = customer
+    this.httpClient.put<Customer>(`${url}/${key}.json`, data, httpOptions).subscribe(
+      response => this.customers[i] = customer,
+      error => console.error(error)
+    )
   }
 
   deleteData(): void {

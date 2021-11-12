@@ -29,16 +29,20 @@
 
 <ng-template #thenBlock let-customer>
   <td class="align-middle">
-    <input class="form-control form-control-sm" type="text" value="{{customer.name}}">
+    <input #name (blur)="setValue('name', name.value, customer.name)"
+           class="form-control form-control-sm" type="text" value="{{customer.name}}">
   </td>
   <td class="align-middle">
-    <input class="form-control form-control-sm" type="email" value="{{customer.email}}">
+    <input #email (blur)="setValue('email', email.value, customer.email)"
+           class="form-control form-control-sm" type="email" value="{{customer.email}}">
   </td>
   <td class="align-middle">
-    <input class="form-control form-control-sm" type="tel" value="{{customer.mobile}}">
+    <input #mobile (blur)="setValue('mobile', mobile.value, customer.mobile)"
+           class="form-control form-control-sm" type="tel" value="{{customer.mobile}}">
   </td>
   <td class="align-middle">
-    <input class="form-control form-control-sm" type="text" value="{{customer.location}}">
+    <input #location (blur)="setValue('location', location.value, customer.location)"
+           class="form-control form-control-sm" type="text" value="{{customer.location}}">
   </td>
 </ng-template>
 
